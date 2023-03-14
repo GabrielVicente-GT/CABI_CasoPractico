@@ -31,11 +31,11 @@ jobs:
       - run: git config --local user.email "chentevilo2001@gmail.com"
       - run: git config --local user.name "GabrielVicente-GT"
       
-      - run: git rm ./TerceraParte/Cuadros_y_graficas_IMAE_ene2023.xlsx
+      - run: git rm ./TerceraParte/remote_solution/Cuadros_y_graficas_IMAE_ene2023.xlsx
       - run: git add .
       - run: git commit -m "Remove last file .xslx" 
       
-      - run: curl -o ./TerceraParte/Cuadros_y_graficas_IMAE_ene2023.xlsx http://www.banguat.gob.gt/sites/default/files/banguat/Publica/IMAE/2013/Cuadros_y_graficas_IMAE_ene2023.xlsx
+      - run: curl -o ./TerceraParte/remote_solution/Cuadros_y_graficas_IMAE_ene2023.xlsx http://www.banguat.gob.gt/sites/default/files/banguat/Publica/IMAE/2013/Cuadros_y_graficas_IMAE_ene2023.xlsx
 
       - run: git add .
       - run: git commit -m "New file"
