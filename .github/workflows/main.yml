@@ -1,0 +1,48 @@
+name: Upload file
+
+# Controls when the action will run. This action runs every 6 hours.
+
+on:
+  schedule:
+      # every hour
+    - cron: "0 */1 * * *"
+
+# This command allows us to run the Action automatically from the Actions tab.
+  workflow_dispatch:
+
+# The sequence of runs in this workflow:
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+    # Checks repo under $GITHUB_WORKSHOP, so your job can access it
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+          fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+
+     # Comands to download the file automatically
+          
+      - run: git config --local user.email "chentevilo2001@gmail.com"
+      - run: git config --local user.name "GabrielVicente-GT"
+      
+      - run: git rm ./TerceraParte/Cuadros_y_graficas_IMAE_ene2023.xlsx
+      - run: git add .
+      - run: git commit -m "Remove last file .xslx" 
+      
+      - run: curl -o ./TerceraParte/Cuadros_y_graficas_IMAE_ene2023.xlsx http://www.banguat.gob.gt/sites/default/files/banguat/Publica/IMAE/2013/Cuadros_y_graficas_IMAE_ene2023.xlsx
+
+      - run: git add .
+      - run: git commit -m "New file"
+      
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          force: true
